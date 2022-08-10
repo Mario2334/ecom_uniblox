@@ -8,7 +8,7 @@ import {useRouter} from "next/router";
 const Login: NextPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [{}, dispatch] = useStateValue();
+    const [{}, dispatch] = useStateValue();
     const router = useRouter();
 
     // Post request to login for USER AUTHENTICATION
@@ -16,17 +16,17 @@ const Login: NextPage = () => {
         try {
             let loginResponse = await axios({
                 method: "post",
-                url: "http://localhost:5000/login",
+                url: "/api/login",
                 data: {
                     email: email,
                     password: password,
                 },
             });
             console.log(loginResponse);
-            // dispatch({
-            //     type: "SET_USER",
-            //     user: email,
-            // });
+            dispatch({
+                type: "SET_USER",
+                user: email,
+            });
             router.push("/");
         } catch (err) {
             console.log(err);
@@ -39,7 +39,7 @@ const Login: NextPage = () => {
     const register = () => {
         axios({
             method: "post",
-            url: "http://localhost:5000/register",
+            url: "/api/register",
             data: {
                 email: email,
                 password: password,
@@ -52,10 +52,10 @@ const Login: NextPage = () => {
             .then((res:void | AxiosResponse) => {
                 if (res && res.statusText === "Created") {
                     console.log(res);
-                    // dispatch({
-                    //     type: "SET_USER",
-                    //     user: email,
-                    // });
+                    dispatch({
+                        type: "SET_USER",
+                        user: email,
+                    });
                     router.push("/");
                 }
             });

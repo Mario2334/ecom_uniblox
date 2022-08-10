@@ -4,16 +4,16 @@ import {useStateValue} from "../StateProvider";
 import {useRouter} from "next/router";
 
 const Header: NextPage = () => {
-    // const [{ user, basket }, dispatch] = useStateValue();
+    const [{ user, basket }, dispatch] = useStateValue();
     const router = useRouter();
 
     const handleLogout = () => {
-        // if (user) {
-        //     dispatch({
-        //         type: "SET_USER",
-        //         user: null,
-        //     });
-        // }
+        if (user) {
+            dispatch({
+                type: "SET_USER",
+                user: null,
+            });
+        }
         router.push("/login");
     };
 
